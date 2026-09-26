@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF4EA">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<title>Steadfast Privacy Policy</title>
+<meta name="description" content="How Steadfast, by SARV Labs, handles your information.">
+<style>
+  body { background: #FDFBF6; color: #1F2A44; }
+  .pnav { position: fixed; inset: 0 0 auto 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); background: rgba(1, 20, 58, .9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+  .pnav__inner { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #FDFBF6; }
+  .pnav a { color: #FDFBF6; text-decoration: none; }
+  .pnav__brand { display: flex; align-items: center; gap: 12px; }
+  .pnav__brand img { width: 28px; height: 28px; border-radius: 7px; }
+  .pnav__brand b { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; }
+  .pnav__links { display: flex; gap: 24px; font-size: .92rem; }
+  .pnav__links a { opacity: .8; }
+  .doc { padding-top: calc(56px + env(safe-area-inset-top, 0px) + clamp(56px, 8vw, 104px)); padding-bottom: clamp(96px, 12vw, 150px); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 8fr); gap: 40px clamp(40px, 6vw, 96px); }
+  @media (max-width: 860px) { .doc { grid-template-columns: 1fr; } .toc { position: static !important; } }
+  .toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 10px; }
+  .toc a { color: #4A5673; text-decoration: none; font-size: 1rem; }
+  .toc a:hover { color: #01224D; text-decoration: underline; text-underline-offset: 3px; }
+  .doc h1 { font-size: var(--fs-h1); max-width: 14ch; }
+  .meta { margin-top: 16px; color: #4A5673; }
+  .doc .intro { margin-top: 28px; font-size: 1.25rem; line-height: 1.6; max-width: 58ch; }
+  .doc section { margin-top: 56px; scroll-margin-top: 90px; }
+  .doc h2 { font-size: clamp(1.7rem, 2.6vw, 2.2rem); }
+  .doc p { margin-top: 14px; color: #3A4560; max-width: 64ch; }
+  .doc strong { color: #1F2A44; }
+  .todo { background: #FFF1CF; border-radius: 4px; padding: 0 4px; }
+  .label { color: #8A5D14; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="pnav">
+  <div class="wrap pnav__inner">
+    <a class="pnav__brand" href="index.html"><img src="../assets/img/sf-icon.png" alt="" width="28" height="28"><b>Steadfast</b></a>
+    <nav class="pnav__links" aria-label="Steadfast"><a href="index.html">Overview</a><a href="../support.html">Support</a></nav>
+  </div>
+</header>
+
+<main id="main" class="wrap doc">
+  <nav class="toc" aria-label="On this page">
+    <p class="label" style="margin-bottom: 6px">On this page</p>
+    <a href="#collect">What we collect</a>
+    <a href="#use">How we use it</a>
+    <a href="#store">Where it is kept</a>
+    <a href="#share">Who we share it with</a>
+    <a href="#choices">Your choices</a>
+    <a href="#children">Children</a>
+    <a href="#contact">Changes and contact</a>
+  </nav>
+  <article>
+    <p class="label">Privacy</p>
+    <h1 style="margin-top: 14px">Steadfast privacy policy</h1>
+    <p class="meta">Effective <span class="todo">[date]</span> · SARV Labs LLC, Austin, Texas</p>
+    <p class="intro">Steadfast is made by SARV Labs LLC. This policy explains what the app collects, why, and what you can do about it. In short: we collect what the app needs to track your challenges, we never sell it, and you can delete it at any time.</p>
+
+    <section id="collect">
+      <h2>What we collect</h2>
+      <p><strong>Account.</strong> When you sign in with Apple or with an email code, we receive an account identifier and an email address, which may be Apple’s private relay address.</p>
+      <p><strong>Your challenges.</strong> The challenges you join, the tasks you log and when, skips, day notes, and your optional daily mood check.</p>
+      <p><strong>Photos.</strong> Progress and meal photos you choose to take in the app.</p>
+      <p><strong>Health data.</strong> If you allow it, Steadfast reads workouts from Apple Health to fill in workout tasks. <span class="todo">[Confirm: stored on our servers, or only read on the device?]</span></p>
+      <p><strong>Location.</strong> If you allow it, your <span class="todo">[approximate]</span> location is used to show your local sky and weather. <span class="todo">[Confirm whether location is stored.]</span></p>
+    </section>
+
+    <section id="use">
+      <h2>How we use it</h2>
+      <p>Only to run Steadfast for you: keeping your days, showing your progress, sending the reminders you turn on, and answering you when you contact support. We do not use your data for advertising, and Health data is never used for marketing or shared with data brokers.</p>
+    </section>
+
+    <section id="store">
+      <h2>Where it is kept</h2>
+      <p>Your account data and photos are stored with Supabase, our database provider, in <span class="todo">[region]</span>. Access is limited to your own account, and photos are kept in private storage.</p>
+    </section>
+
+    <section id="share">
+      <h2>Who we share it with</h2>
+      <p>We do not sell your personal information. We share it only with the service providers that run the app (Supabase for storage; Apple for sign-in, weather and payments) or when the law requires it.</p>
+    </section>
+
+    <section id="choices">
+      <h2>Your choices</h2>
+      <p>You can turn off Health, location and notification access in your iPhone’s Settings at any time. You can delete your account in Steadfast under Settings; this permanently removes your data from our servers <span class="todo">[within X days]</span>. You can also email us to ask for a copy of your data.</p>
+    </section>
+
+    <section id="children">
+      <h2>Children</h2>
+      <p>Steadfast is not directed to children under 13, and we do not knowingly collect their information.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Changes and contact</h2>
+      <p>If this policy changes, we will update the date above and, for significant changes, tell you in the app. Questions: support@sarvlabs.app.</p>
+    </section>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="../assets/img/logo-cream.svg" alt="SARV Labs" width="112" height="36">
+        <p>Thoughtful software, made to last. An independent studio in Austin, Texas.</p>
+      </div>
+      <div>
+        <h4>Apps</h4>
+        <ul>
+          <li><a href="../steadfast/index.html">Steadfast</a></li>
+          <li><a href="../encircled/index.html">Encircled</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../support.html">Support</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@sarvlabs.app">support@sarvlabs.app</a></li>
+          <li style="color: var(--on-teal); font-size: 1rem">Austin, Texas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> SARV Labs LLC. All rights reserved.</span>
+      <span>Made with care in Austin, Texas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

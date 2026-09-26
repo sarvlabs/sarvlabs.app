@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF4EA">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<title>Steadfast</title>
+<meta name="description" content="Steadfast: 1% better every day. A challenge tracker for habits, health and fitness, by SARV Labs. Coming soon to iPhone.">
+<meta name="theme-color" content="#01143A">
+<style>
+  :root {
+    --navy: #01224D; --night: #01143A; --sf-gold: #E3A73F; --moon: #ADD3F9; --sf-cream: #FDFBF6;
+    --sf-ink: #1F2A44; --sf-ink-2: #4A5673;
+  }
+  body.sf { background: var(--night); color: var(--sf-cream); }
+  .sf .label { color: var(--sf-gold); }
+
+  /* Product nav */
+  .pnav { position: fixed; inset: 0 0 auto 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); background: rgba(1, 20, 58, .62); backdrop-filter: saturate(1.5) blur(18px); -webkit-backdrop-filter: saturate(1.5) blur(18px); border-bottom: 1px solid rgba(253, 251, 246, .08); }
+  .pnav__inner { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .pnav__brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--sf-cream); }
+  .pnav__brand img.icon { width: 28px; height: 28px; border-radius: 7px; }
+  .pnav__brand b { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; letter-spacing: -.01em; }
+  .pnav__by { display: flex; align-items: center; padding-left: 14px; border-left: 1px solid rgba(253,251,246,.2); opacity: .75; transition: opacity .3s; }
+  .pnav__by:hover { opacity: 1; }
+  .pnav__by img { height: 15px; width: auto; }
+  .pnav__links { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px); list-style: none; margin: 0; padding: 0; }
+  .pnav__links a { color: var(--sf-cream); text-decoration: none; font-size: .92rem; opacity: .78; }
+  .pnav__links a:hover { opacity: 1; }
+  .pill { display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 999px; background: var(--sf-gold); color: var(--navy); font-size: .82rem; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+  @media (max-width: 640px) { .pnav__links li.hide-sm, .pnav__by { display: none; } }
+
+  .device { position: relative; aspect-ratio: 700 / 1277; border-radius: clamp(30px, 3.4vw, 46px); overflow: hidden; background: #0B1B38; border: clamp(5px, .5vw, 7px) solid #0B1B38; box-shadow: 0 60px 120px -50px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255,255,255,.06); }
+  .device img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+  /* 1 · Hero */
+  .hero { position: relative; overflow: hidden; text-align: center; padding-top: calc(56px + env(safe-area-inset-top, 0px) + clamp(56px, 9vw, 120px)); background: linear-gradient(180deg, #01143A 0%, #01224D 42%, #3B2A5C 70%, #6E3A63 86%, #B85A4A 100%); }
+  .stars { position: absolute; inset: 0 0 40% 0; pointer-events: none; background-image:
+      radial-gradient(1.2px 1.2px at 12% 18%, #fff 60%, transparent), radial-gradient(1px 1px at 27% 42%, #fff 60%, transparent),
+      radial-gradient(1.4px 1.4px at 44% 12%, #fff 60%, transparent), radial-gradient(1px 1px at 63% 30%, #fff 60%, transparent),
+      radial-gradient(1.3px 1.3px at 78% 16%, #fff 60%, transparent), radial-gradient(1px 1px at 88% 44%, #fff 60%, transparent),
+      radial-gradient(1px 1px at 6% 52%, #fff 60%, transparent), radial-gradient(1.2px 1.2px at 55% 55%, #fff 60%, transparent),
+      radial-gradient(1px 1px at 35% 70%, #fff 60%, transparent), radial-gradient(1.1px 1.1px at 94% 66%, #fff 60%, transparent);
+    opacity: .7; animation: twinkle 5s ease-in-out infinite alternate; }
+  @keyframes twinkle { from { opacity: .35; } to { opacity: .8; } }
+  .hero__sun { position: absolute; left: 50%; bottom: 8%; width: min(70vw, 760px); aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, 55%); background: radial-gradient(circle, rgba(255, 209, 102, .55) 0%, rgba(227, 167, 63, .25) 30%, rgba(209, 106, 68, 0) 62%); animation: sunrise 3s var(--ease) .2s both; pointer-events: none; }
+  @keyframes sunrise { from { transform: translate(-50%, 90%); opacity: 0; } to { transform: translate(-50%, 55%); opacity: 1; } }
+  .hero__icon { width: 88px; height: 88px; border-radius: 21px; margin: 0 auto; box-shadow: 0 20px 40px -16px rgba(0,0,0,.6); animation: pop 1s var(--ease) both; }
+  .hero h1 { font-size: clamp(4.2rem, 13vw, 11.5rem); font-weight: 300; letter-spacing: -.035em; line-height: .95; margin-top: 22px; animation: rise 1.2s var(--ease) .12s both; }
+  .hero__tag { font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 3vw, 2.4rem); color: var(--moon); margin-top: 10px; animation: rise 1.2s var(--ease) .28s both; }
+  .hero__cta { display: flex; justify-content: center; align-items: center; gap: 14px 28px; flex-wrap: wrap; margin-top: 34px; animation: rise 1.2s var(--ease) .44s both; }
+  .hero__cta .more { color: #FFD9A0; }
+  @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+  .hero__stage { position: relative; height: clamp(560px, 78vw, 900px); margin-top: clamp(48px, 7vw, 88px); perspective: 1400px; }
+  .hero__device { position: absolute; left: 50%; top: 0; width: clamp(250px, 30vw, 380px); transform-origin: 50% 0;
+    transform: translateX(-50%) translateY(calc(var(--p, 0) * -60px)) rotateX(calc(14deg - var(--p, 0) * 14deg)) scale(calc(.94 + var(--p, 0) * .08));
+    animation: deviceIn 1.6s var(--ease) .5s both; }
+  @keyframes deviceIn { from { opacity: 0; translate: 0 120px; } to { opacity: 1; translate: 0 0; } }
+
+  /* 2 · Statement */
+  .statement { background: var(--navy); padding-block: clamp(110px, 14vw, 200px); }
+  .statement p { font-family: var(--serif); font-weight: 350; font-size: clamp(2rem, 4.6vw, 4.1rem); line-height: 1.12; letter-spacing: -.02em; max-width: 20ch; }
+
+  /* 3 · Sky scene */
+  .sky { position: relative; height: 380vh; }
+  .sky__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: linear-gradient(180deg, var(--top, #2F6FBF), var(--bot, #9CC4F0)); }
+  .sky__stage::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(1, 20, 58, .38), rgba(1, 20, 58, 0) 62%); pointer-events: none; }
+  .sky__orb { position: absolute; width: clamp(90px, 10vw, 150px); aspect-ratio: 1; border-radius: 50%; left: var(--ox, 70%); top: var(--oy, 20%); transform: translate(-50%, -50%); background: radial-gradient(circle, var(--orb, #FFF3D6) 0%, var(--orb, #FFF3D6) 38%, rgba(255,255,255,0) 70%); filter: blur(1px); transition: background .6s; }
+  .sky__inner { position: relative; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 32px; padding-top: 56px; }
+  .captions { position: relative; min-height: 340px; }
+  .cap { position: absolute; inset: 0 0 auto 0; display: grid; gap: 16px; opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .8s var(--ease); pointer-events: none; }
+  .cap.on { opacity: 1; transform: none; pointer-events: auto; }
+  .cap .label { color: #FFE2A8; }
+  .cap h2 { font-size: clamp(2.3rem, 4.6vw, 4.2rem); color: #fff; text-shadow: 0 2px 30px rgba(1,20,58,.25); max-width: 13ch; }
+  .cap p { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: rgba(255,255,255,.92); max-width: 36ch; }
+  .sky__device { justify-self: center; width: clamp(230px, 24vw, 330px); }
+  .sky__device img { opacity: 0; transition: opacity .8s var(--ease); }
+  .sky__device img.on { opacity: 1; }
+  .ticks { display: flex; gap: 8px; margin-top: 28px; }
+  .ticks span { width: 28px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); overflow: hidden; position: relative; }
+  .ticks span i { position: absolute; inset: 0; background: #fff; transform-origin: left; transform: scaleX(var(--f, 0)); }
+  @media (max-width: 820px) {
+    .sky__inner { grid-template-columns: 1fr; align-content: center; gap: 20px; padding-top: 80px; }
+    .captions { min-height: 230px; }
+    .cap h2 { font-size: 2.1rem; }
+    .sky__device { width: min(52vw, 230px); }
+    .sky__stage::before { background: linear-gradient(180deg, rgba(1,20,58,.4), rgba(1,20,58,0) 55%); }
+  }
+
+  /* Light sections */
+  .light { background: var(--sf-cream); color: var(--sf-ink); }
+  .light .label { color: #8A5D14; }
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 48px clamp(40px, 7vw, 120px); padding-block: clamp(110px, 13vw, 190px); }
+  .split h2 { font-size: var(--fs-h2); margin-top: 14px; max-width: 13ch; }
+  .split p.body { margin-top: 22px; font-size: 1.2rem; color: var(--sf-ink-2); max-width: 40ch; }
+  .dark .split p.body { color: #C8D6EE; }
+  .split .device { width: clamp(240px, 26vw, 340px); justify-self: center; }
+  .split--flip > :first-child { order: 2; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split--flip > :first-child { order: 0; } }
+  .choice { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+  .choice span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; font-weight: 600; font-size: 1rem; }
+  .choice span:first-child { background: #1B2338; color: #fff; }
+  .choice span:last-child { background: var(--navy); color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset; }
+
+  /* 5 · Journey */
+  .journey { background: linear-gradient(180deg, #01143A, #01224D); padding-block: clamp(110px, 13vw, 180px); }
+  .journey__head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px 64px; align-items: end; }
+  .journey__head h2 { font-size: var(--fs-h2); margin-top: 14px; max-width: 14ch; }
+  .journey__head p { font-size: 1.2rem; color: #C8D6EE; max-width: 40ch; }
+  @media (max-width: 820px) { .journey__head { grid-template-columns: 1fr; } }
+  .road { margin-top: clamp(48px, 6vw, 80px); }
+  .road svg { width: 100%; height: auto; overflow: visible; }
+  .road__track { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+  .road__done { fill: none; stroke: #FFD166; stroke-opacity: .9; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+  .coin { fill: #1B2A5C; stroke: rgba(255,255,255,.35); stroke-width: 2; transition: fill .35s, stroke .35s; }
+  .coin.done { fill: #FFB703; stroke: #FFD166; stroke-width: 4; }
+  .coin.ms { stroke: #FFD166; stroke-dasharray: 5 5; stroke-width: 2.5; }
+  .coin.ms.done { stroke-dasharray: none; }
+  .road__meta { margin-top: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 1.1rem; color: #C8D6EE; font-variant-numeric: tabular-nums; }
+  .road__meta b { font-family: var(--serif); font-weight: 400; font-size: 2rem; color: #FFD166; }
+
+  /* 7 · Forgiven */
+  .forgiven { padding-block: clamp(120px, 15vw, 210px); }
+  .forgiven h2 { font-size: clamp(3rem, 8vw, 7.4rem); font-weight: 300; line-height: 1; letter-spacing: -.03em; max-width: 12ch; }
+  .forgiven h2 em { color: #B7791F; }
+  .forgiven p { margin-top: 32px; font-size: clamp(1.15rem, 1.6vw, 1.4rem); color: var(--sf-ink-2); max-width: 44ch; }
+
+  /* 8 · Ladder */
+  .ladder { padding-bottom: clamp(110px, 13vw, 180px); }
+  .ladder h2 { font-size: var(--fs-h2); max-width: 16ch; margin-top: 14px; }
+  .rungs { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .rungs { grid-template-columns: 1fr; } }
+  .rung { border-radius: 28px; padding: clamp(28px, 3vw, 40px); display: grid; gap: 14px; align-content: start; background: #EEF3FA; min-height: 280px; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+  .rung:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -36px rgba(1,34,77,.45); }
+  .rung--strict { background: var(--navy); color: #fff; }
+  .rung h3 { font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 350; }
+  .rung p { color: var(--sf-ink-2); font-size: 1.08rem; }
+  .rung--strict p { color: #C8D6EE; }
+  .dots { display: flex; gap: 7px; }
+  .dots i { width: 13px; height: 13px; border-radius: 50%; background: #C9D3E2; transform: scale(.4); opacity: .4; transition: transform .5s var(--ease), opacity .5s, background-color .5s; transition-delay: calc(var(--k) * 90ms + .2s); }
+  .rung.is-in .dots i { transform: none; opacity: 1; }
+  .rung.is-in .dots i.f { background: var(--navy); }
+  .rung--strict.is-in .dots i.f { background: var(--sf-gold); }
+  .rung--strict .dots i { background: rgba(255,255,255,.2); }
+  .effort { font-size: .82rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8A5D14; }
+  .rung--strict .effort { color: var(--sf-gold); }
+
+  /* 9 · Bento */
+  .bento-wrap { padding-bottom: clamp(110px, 13vw, 180px); }
+  .bento-wrap h2 { font-size: var(--fs-h2); margin-top: 14px; max-width: 16ch; }
+  .bento { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+  .cell { border-radius: 28px; padding: clamp(26px, 2.8vw, 36px); background: #fff; box-shadow: 0 1px 0 rgba(1,34,77,.04), 0 20px 50px -40px rgba(1,34,77,.35); display: grid; gap: 10px; align-content: start; grid-column: span 2; min-height: 250px; }
+  .cell--wide { grid-column: span 3; }
+  .cell--navy { background: var(--navy); color: #fff; }
+  .cell--navy p { color: #C8D6EE !important; }
+  .cell h3 { font-size: clamp(1.5rem, 2.1vw, 1.9rem); }
+  .cell p { color: var(--sf-ink-2); font-size: 1.05rem; }
+  .cell__art { height: 64px; display: flex; align-items: center; }
+  @media (max-width: 980px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cell, .cell--wide { grid-column: span 1; } }
+  @media (max-width: 600px) { .bento { grid-template-columns: 1fr; } }
+  .water { width: 100%; max-width: 240px; }
+  .water__bar { height: 10px; border-radius: 6px; background: #E3E8F1; position: relative; overflow: hidden; }
+  .water__bar i { position: absolute; inset: 0; background: linear-gradient(90deg, #5FA8D3, #9BD4F0); transform-origin: left; transform: scaleX(.2); transition: transform 1.6s var(--ease) .3s; }
+  .cell.is-in .water__bar i { transform: scaleX(.75); }
+  .water__meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: .95rem; color: var(--sf-ink-2); font-variant-numeric: tabular-nums; }
+
+  /* 10 · Challenges marquee */
+  .catalog { background: var(--navy); padding-block: clamp(100px, 12vw, 160px); overflow: hidden; }
+  .catalog h2 { font-size: var(--fs-h2); margin-top: 14px; max-width: 16ch; }
+  .marquee { margin-top: clamp(40px, 5vw, 64px); display: grid; gap: 14px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee__row { display: flex; gap: 14px; width: max-content; animation: slide 46s linear infinite; }
+  .marquee__row--rev { animation-direction: reverse; animation-duration: 54s; }
+  .marquee:hover .marquee__row { animation-play-state: paused; }
+  .chip { display: inline-flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 26px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); font-family: var(--serif); font-size: 1.35rem; white-space: nowrap; }
+  .chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--sf-gold); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .catalog small { display: block; margin-top: 36px; color: #9FB0CF; font-size: .95rem; max-width: 70ch; }
+  @media (prefers-reduced-motion: reduce) { .marquee__row { animation: none; flex-wrap: wrap; width: auto; } .marquee__row[aria-hidden] { display: none; } }
+
+  /* 11 · Finale */
+  .finale { position: relative; overflow: hidden; text-align: center; padding-block: clamp(120px, 15vw, 220px); background: linear-gradient(180deg, #01224D 0%, #3B2A5C 45%, #6E3A63 72%, #D16A44 100%); }
+  .finale__glow { position: absolute; left: 50%; bottom: -30%; width: min(90vw, 900px); aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(255, 209, 102, .55), rgba(209, 106, 68, 0) 62%); pointer-events: none; }
+  .finale > .wrap { position: relative; }
+  .finale img { width: 116px; height: 116px; border-radius: 27px; margin: 0 auto; box-shadow: 0 30px 60px -24px rgba(0,0,0,.6); }
+  .finale h2 { font-size: clamp(2.8rem, 7vw, 6rem); margin-top: 28px; }
+  .finale .free { margin: 22px auto 0; font-size: clamp(1.15rem, 1.7vw, 1.45rem); color: #F3E5D8; max-width: 40ch; }
+  .finale .free b { color: #fff; }
+  .finale .hero__cta { animation: none; }
+  .fineprint { margin-top: 56px; font-size: .9rem; color: rgba(253,251,246,.7); max-width: 60ch; margin-inline: auto; }
+</style>
+</head>
+<body class="sf">
+<a class="skip" href="#main">Skip to content</a>
+<header class="pnav">
+  <div class="wrap pnav__inner">
+    <div style="display:flex; align-items:center; gap:14px">
+      <a class="pnav__brand" href="index.html"><img class="icon" src="../assets/img/sf-icon.png" alt="" width="28" height="28"><b>Steadfast</b></a>
+      <a class="pnav__by" href="../index.html" aria-label="By SARV Labs"><img src="../assets/img/logo-cream.svg" alt="SARV Labs" width="47" height="15"></a>
+    </div>
+    <ul class="pnav__links">
+      <li class="hide-sm"><a href="#how">How it works</a></li>
+      <li class="hide-sm"><a href="privacy.html">Privacy</a></li>
+      <li class="hide-sm"><a href="../support.html">Support</a></li>
+      <li><span class="pill">Coming soon</span></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1 · Hero -->
+  <section class="hero" data-scene aria-labelledby="sf-title">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="hero__sun" aria-hidden="true"></div>
+    <div class="wrap" style="position: relative">
+      <img class="hero__icon" src="../assets/img/sf-icon.png" alt="Steadfast app icon" width="88" height="88">
+      <h1 id="sf-title">Steadfast</h1>
+      <p class="hero__tag">1% better every day.</p>
+      <div class="hero__cta">
+        <span class="pill" style="min-height: 44px; padding: 0 22px; font-size: .95rem">Coming soon to iPhone</span>
+        <a class="more" href="#how">See how it works</a>
+      </div>
+    </div>
+    <div class="hero__stage" aria-hidden="true">
+      <div class="device hero__device"><img src="../assets/img/sf-golden.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <!-- 2 · Statement -->
+  <section class="statement" id="how">
+    <div class="wrap">
+      <p data-scrub>Pick a challenge. Show up every day. Watch small promises add up to something you are proud of.</p>
+    </div>
+  </section>
+
+  <!-- 3 · Sky scene -->
+  <section class="sky" data-scene="sticky" id="sky" aria-label="A day in Steadfast, from morning to night">
+    <div class="sky__stage">
+      <div class="sky__orb" aria-hidden="true"></div>
+      <div class="wrap sky__inner">
+        <div>
+          <div class="captions">
+            <div class="cap on">
+              <p class="label">Morning</p>
+              <h2>A sky that knows your day.</h2>
+              <p>The Today screen follows the real time and weather where you are. A clear morning looks like a clear morning.</p>
+            </div>
+            <div class="cap">
+              <p class="label">Golden hour</p>
+              <h2>Your day, as a wave.</h2>
+              <p>Every task sits along a gentle timeline at the time you planned it. Check them off as you go.</p>
+            </div>
+            <div class="cap">
+              <p class="label">Night</p>
+              <h2>Night falls. The day is kept.</h2>
+              <p>Finish the list and the day turns gold on your Journey. Tomorrow starts fresh.</p>
+            </div>
+          </div>
+          <div class="ticks" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+        </div>
+        <div class="device sky__device">
+          <img class="on" src="../assets/img/sf-day.jpg" alt="Steadfast Today screen on a clear morning">
+          <img src="../assets/img/sf-golden.jpg" alt="Steadfast Today screen at golden hour">
+          <img src="../assets/img/sf-night.jpg" alt="Steadfast Today screen at night, with the moon">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Weather -->
+  <section class="light">
+    <div class="wrap split">
+      <div class="device" data-reveal="scale"><img src="../assets/img/sf-rain.jpg" alt="A rain notice: outdoor workout in a wet slot, with options to wait for 6:55 PM or go anyway"></div>
+      <div>
+        <p class="label" data-reveal>Weather-aware</p>
+        <h2 data-reveal style="--d:.06s">Rain at 3:55? It already knows.</h2>
+        <p class="body" data-reveal style="--d:.12s">When an outdoor workout lands in a wet slot, Steadfast checks the forecast and offers to wait for the dry spell. Or you go anyway. It suggests; you decide.</p>
+        <div class="choice" data-reveal style="--d:.18s" aria-hidden="true"><span>Wait for 6:55 PM</span><span>Go anyway</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Journey -->
+  <section class="journey" data-scene id="journey">
+    <div class="wrap">
+      <div class="journey__head">
+        <div>
+          <p class="label" data-reveal>Journey</p>
+          <h2 data-reveal style="--d:.06s">Seventy-five days. One road.</h2>
+        </div>
+        <p data-reveal style="--d:.12s">Every day you keep becomes a gold coin on the road. The milestones at 25, 50 and 75 are always in view.</p>
+      </div>
+      <div class="road" aria-hidden="true"><svg id="road" viewBox="0 0 1200 460"></svg></div>
+      <div class="road__meta" aria-live="off"><span><b id="dayNum">Day 1</b> of 75</span><span id="toGo">74 days to go</span></div>
+    </div>
+  </section>
+
+  <!-- 6 · Review -->
+  <section class="dark" style="background: var(--navy)">
+    <div class="wrap split split--flip">
+      <div class="device" data-reveal="scale"><img src="../assets/img/sf-review.jpg" alt="Day in review: Day 12, kept, with every task and the time it was done"></div>
+      <div>
+        <p class="label" data-reveal>Every evening</p>
+        <h2 data-reveal style="--d:.06s">A quiet look back.</h2>
+        <p class="body" data-reveal style="--d:.12s">The day in review lists what you did and when. Add how it felt if you like. It never changes whether the day counted.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Forgiven -->
+  <section class="light forgiven">
+    <div class="wrap">
+      <h2 data-reveal>Hard days happen. Skips are <em>forgiven</em>.</h2>
+      <p data-reveal style="--d:.12s">When a challenge allows skips, Steadfast applies them for you and the next morning tells you exactly what was forgiven. No shame, no panic about streaks.</p>
+    </div>
+  </section>
+
+  <!-- 8 · Ladder -->
+  <section class="light ladder">
+    <div class="wrap">
+      <p class="label" data-reveal>Three ways in</p>
+      <h2 data-reveal style="--d:.06s">Choose how hard.</h2>
+      <div class="rungs">
+        <article class="rung rung--strict" data-reveal>
+          <p class="effort">Effort 5 of 5</p>
+          <div class="dots" aria-hidden="true"><i class="f" style="--k:0"></i><i class="f" style="--k:1"></i><i class="f" style="--k:2"></i><i class="f" style="--k:3"></i><i class="f" style="--k:4"></i></div>
+          <h3>75 Strict</h3>
+          <p>Every task, every day. Miss one and you begin again at Day 1.</p>
+        </article>
+        <article class="rung" data-reveal style="--d:.1s">
+          <p class="effort">Effort 3 of 5</p>
+          <div class="dots" aria-hidden="true"><i class="f" style="--k:0"></i><i class="f" style="--k:1"></i><i class="f" style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></div>
+          <h3>75 Medium</h3>
+          <p>A lighter daily load, with three forgiven skips before a restart.</p>
+        </article>
+        <article class="rung" data-reveal style="--d:.2s">
+          <p class="effort">Effort 2 of 5</p>
+          <div class="dots" aria-hidden="true"><i class="f" style="--k:0"></i><i class="f" style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></div>
+          <h3>75 Soft</h3>
+          <p>Misses are noted, never punished. Keep going and see the whole picture at the end.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Bento -->
+  <section class="light bento-wrap">
+    <div class="wrap">
+      <p class="label" data-reveal>The details</p>
+      <h2 data-reveal style="--d:.06s">Small things, done properly.</h2>
+      <div class="bento">
+        <div class="cell cell--wide cell--navy" data-reveal>
+          <div class="cell__art" aria-hidden="true"><svg width="120" height="44" viewBox="0 0 120 44" fill="none"><path d="M2 24h26l8-18 14 34 10-22h58" stroke="#FFD166" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Works with Apple Health</h3>
+          <p>Workouts can fill themselves in. You choose which ones count toward which task.</p>
+        </div>
+        <div class="cell cell--wide" data-reveal style="--d:.08s">
+          <div class="cell__art" aria-hidden="true"><div class="water"><div class="water__bar"><i></i></div><div class="water__meta"><span>96 / 128 oz</span><span>on pace</span></div></div></div>
+          <h3>Water, eight at a time</h3>
+          <p>One tap per glass, with a pace line so you know if you are on track. A mistaken tap comes back with −8.</p>
+        </div>
+        <div class="cell" data-reveal>
+          <div class="cell__art" aria-hidden="true"><svg width="52" height="44" viewBox="0 0 52 44" fill="none" stroke="#01224D" stroke-width="2.4" stroke-linecap="round"><path d="M4 6v32M10 6v32M16 6v32M24 6v32M30 6v32M38 6v32M44 6v32M48 6v32"/></svg></div>
+          <h3>Scan the book</h3>
+          <p>Log reading against the book in your hands. Scan its barcode and the cover appears.</p>
+        </div>
+        <div class="cell" data-reveal style="--d:.08s">
+          <div class="cell__art" aria-hidden="true"><svg width="52" height="44" viewBox="0 0 52 44" fill="none" stroke="#01224D" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="10" width="46" height="30" rx="7"/><circle cx="26" cy="25" r="8"/><path d="M17 10l4-6h10l4 6"/></svg></div>
+          <h3>Photo of the day</h3>
+          <p>One picture a day, and seventy-five days later you can scroll through the change.</p>
+        </div>
+        <div class="cell" data-reveal style="--d:.16s">
+          <div class="cell__art" aria-hidden="true"><svg width="120" height="30" viewBox="0 0 120 30"><circle cx="12" cy="15" r="10" fill="#E3E8F1"/><circle cx="36" cy="15" r="10" fill="#E3E8F1"/><circle cx="60" cy="15" r="10" fill="#E3E8F1"/><circle cx="84" cy="15" r="10" fill="#E3A73F"/><circle cx="108" cy="15" r="10" fill="#E3E8F1"/></svg></div>
+          <h3>How did it feel?</h3>
+          <p>An optional mood and a note each day, so the end of a challenge comes with its own story.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Challenges -->
+  <section class="catalog">
+    <div class="wrap">
+      <p class="label" data-reveal>Challenges</p>
+      <h2 data-reveal style="--d:.06s">Start with a classic. Or try something new.</h2>
+    </div>
+    <div class="marquee">
+      <div class="marquee__row">
+        <span class="chip"><i></i>75 Strict</span><span class="chip"><i></i>75 Medium</span><span class="chip"><i></i>75 Soft</span><span class="chip"><i></i>Alcohol-free January</span><span class="chip"><i></i>Early riser</span><span class="chip"><i></i>Whole-food reset</span>
+        <span class="chip" aria-hidden="true"><i></i>75 Strict</span><span class="chip" aria-hidden="true"><i></i>75 Medium</span><span class="chip" aria-hidden="true"><i></i>75 Soft</span><span class="chip" aria-hidden="true"><i></i>Alcohol-free January</span><span class="chip" aria-hidden="true"><i></i>Early riser</span><span class="chip" aria-hidden="true"><i></i>Whole-food reset</span>
+      </div>
+      <div class="marquee__row marquee__row--rev">
+        <span class="chip"><i></i>Plant-based January</span><span class="chip"><i></i>Six-part morning</span><span class="chip"><i></i>Alcohol-free October</span><span class="chip"><i></i>75 Strict</span><span class="chip"><i></i>Early riser</span>
+        <span class="chip" aria-hidden="true"><i></i>Plant-based January</span><span class="chip" aria-hidden="true"><i></i>Six-part morning</span><span class="chip" aria-hidden="true"><i></i>Alcohol-free October</span><span class="chip" aria-hidden="true"><i></i>75 Strict</span><span class="chip" aria-hidden="true"><i></i>Early riser</span>
+      </div>
+    </div>
+    <div class="wrap"><small>Some Steadfast challenges are inspired by popular programs. Steadfast is not affiliated with, sponsored by, or endorsed by their creators.</small></div>
+  </section>
+
+  <!-- 11 · Finale -->
+  <section class="finale">
+    <div class="finale__glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <img src="../assets/img/sf-icon.png" alt="Steadfast app icon" width="116" height="116" data-reveal="scale">
+      <h2 data-reveal style="--d:.08s">Free to start.</h2>
+      <p class="free" data-reveal style="--d:.16s">Pick <b>any one challenge</b> and run it, start to finish, for free. Coming soon to iPhone, with Android on the way.</p>
+      <div class="hero__cta" data-reveal style="--d:.24s">
+        <span class="pill" style="min-height: 48px; padding: 0 24px; font-size: 1rem">Coming soon to iPhone</span>
+        <a class="more" href="../support.html" style="color: #FFE2A8">Questions? Contact support</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="../assets/img/logo-cream.svg" alt="SARV Labs" width="112" height="36">
+        <p>Thoughtful software, made to last. An independent studio in Austin, Texas.</p>
+      </div>
+      <div>
+        <h4>Apps</h4>
+        <ul>
+          <li><a href="../steadfast/index.html">Steadfast</a></li>
+          <li><a href="../encircled/index.html">Encircled</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../support.html">Support</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@sarvlabs.app">support@sarvlabs.app</a></li>
+          <li style="color: var(--on-teal); font-size: 1rem">Austin, Texas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> SARV Labs LLC. All rights reserved.</span>
+      <span>Made with care in Austin, Texas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js"></script>
+<script>
+(function () {
+  var reduce = window.SARV && window.SARV.reduce;
+
+  /* ---- Sky scene: morning → golden hour → night ---- */
+  var sky = document.getElementById('sky');
+  var stage = sky.querySelector('.sky__stage');
+  var caps = [].slice.call(sky.querySelectorAll('.cap'));
+  var shots = [].slice.call(sky.querySelectorAll('.sky__device img'));
+  var ticks = [].slice.call(sky.querySelectorAll('.ticks i'));
+  var keys = [
+    { p: 0.00, top: [47, 111, 191], bot: [156, 196, 240], orb: '#FFF6DC', ox: 72, oy: 22 },
+    { p: 0.26, top: [47, 111, 191], bot: [156, 196, 240], orb: '#FFF6DC', ox: 64, oy: 16 },
+    { p: 0.46, top: [110, 58, 99], bot: [209, 106, 68], orb: '#FFD9A0', ox: 80, oy: 58 },
+    { p: 0.62, top: [110, 58, 99], bot: [209, 106, 68], orb: '#FFD9A0', ox: 86, oy: 70 },
+    { p: 0.80, top: [1, 20, 58], bot: [1, 34, 77], orb: '#EEF4FF', ox: 74, oy: 18 },
+    { p: 1.00, top: [1, 20, 58], bot: [1, 34, 77], orb: '#EEF4FF', ox: 70, oy: 16 }
+  ];
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function mix(c1, c2, t) { return 'rgb(' + c1.map(function (v, i) { return Math.round(lerp(v, c2[i], t)); }).join(',') + ')'; }
+  function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  var current = -1;
+  function paintSky(p) {
+    var i = 0; while (i < keys.length - 2 && p > keys[i + 1].p) i++;
+    var a = keys[i], b = keys[i + 1];
+    var t = ease(Math.max(0, Math.min(1, (p - a.p) / (b.p - a.p))));
+    stage.style.setProperty('--top', mix(a.top, b.top, t));
+    stage.style.setProperty('--bot', mix(a.bot, b.bot, t));
+    stage.style.setProperty('--ox', lerp(a.ox, b.ox, t) + '%');
+    stage.style.setProperty('--oy', lerp(a.oy, b.oy, t) + '%');
+    stage.style.setProperty('--orb', t < .5 ? a.orb : b.orb);
+    var idx = p < 0.36 ? 0 : p < 0.72 ? 1 : 2;
+    if (idx !== current) {
+      current = idx;
+      caps.forEach(function (c, k) { c.classList.toggle('on', k === idx); c.setAttribute('aria-hidden', k === idx ? 'false' : 'true'); });
+      shots.forEach(function (s, k) { s.classList.toggle('on', k === idx); });
+    }
+    ticks.forEach(function (tk, k) {
+      var start = k / 3, f = Math.max(0, Math.min(1, (p - start) * 3));
+      tk.style.setProperty('--f', f.toFixed(3));
+    });
+  }
+  sky.addEventListener('scene', function (e) { paintSky(e.detail); });
+  paintSky(0);
+
+  /* ---- Journey road: 75 coins in a serpentine, filling as you scroll ---- */
+  var svg = document.getElementById('road');
+  var NS = 'http://www.w3.org/2000/svg';
+  var cols = 15, rows = 5, x0 = 40, x1 = 1160, y0 = 40, dy = 95;
+  var small = window.matchMedia('(max-width: 700px)').matches;
+  if (small) { cols = 5; rows = 15; x0 = 40; x1 = 360; dy = 70; svg.setAttribute('viewBox', '0 0 400 1070'); }
+  var dx = (x1 - x0) / (cols - 1);
+  var pts = [];
+  for (var r = 0; r < rows; r++) {
+    for (var c = 0; c < cols; c++) {
+      var cc = r % 2 === 0 ? c : cols - 1 - c;
+      pts.push([x0 + cc * dx, y0 + r * dy]);
+    }
+  }
+  var d = 'M' + pts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L');
+  var track = document.createElementNS(NS, 'path'); track.setAttribute('d', d); track.setAttribute('class', 'road__track'); svg.appendChild(track);
+  var done = document.createElementNS(NS, 'path'); done.setAttribute('d', d); done.setAttribute('class', 'road__done'); svg.appendChild(done);
+  var len = track.getTotalLength ? track.getTotalLength() : 5000;
+  done.style.strokeDasharray = len; done.style.strokeDashoffset = len;
+  var coins = pts.map(function (p, i) {
+    var el = document.createElementNS(NS, 'circle');
+    el.setAttribute('cx', p[0]); el.setAttribute('cy', p[1]); el.setAttribute('r', small ? 15 : 17);
+    el.setAttribute('class', 'coin' + ((i + 1) % 25 === 0 ? ' ms' : ''));
+    svg.appendChild(el); return el;
+  });
+  var dayNum = document.getElementById('dayNum'), toGo = document.getElementById('toGo');
+  var journey = document.getElementById('journey');
+  var shown = -1;
+  function paintRoad(p) {
+    var t = Math.max(0, Math.min(1, (p - 0.22) / 0.46));
+    var n = reduce ? 75 : Math.max(1, Math.round(t * 75));
+    if (n === shown) return; shown = n;
+    coins.forEach(function (c, i) { c.classList.toggle('done', i < n); });
+    var frac = (n - 1) / 74;
+    done.style.strokeDashoffset = (len * (1 - frac)).toFixed(1);
+    dayNum.textContent = 'Day ' + n;
+    toGo.textContent = n >= 75 ? 'Challenge complete' : (75 - n) + (75 - n === 1 ? ' day to go' : ' days to go');
+  }
+  journey.addEventListener('scene', function (e) { paintRoad(e.detail); });
+  paintRoad(journey._p || 0);
+  if (window.SARV) window.SARV.refresh();
+})();
+</script>
+</body>
+</html>

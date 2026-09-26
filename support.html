@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF4EA">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<title>SARV Labs Support</title>
+<meta name="description" content="Help with Steadfast and Encircled, the apps made by SARV Labs.">
+<style>
+  .intro { padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + clamp(56px, 8vw, 112px)); padding-bottom: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px 64px; align-items: end; }
+  .intro h1 { font-size: var(--fs-hero); margin-top: 16px; animation: up 1.1s var(--ease) .05s both; }
+  .intro .lead { margin-top: 20px; animation: up 1.1s var(--ease) .2s both; }
+  @keyframes up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 860px) { .intro { grid-template-columns: 1fr; } }
+
+  .mail { background: var(--teal); color: var(--cream); border-radius: 28px; padding: clamp(28px, 3.4vw, 40px); display: grid; gap: 16px; animation: up 1.1s var(--ease) .35s both; }
+  .mail .label { color: var(--gold); }
+  .mail__addr { font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.1; word-break: break-word; }
+  .mail__row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .mail p { color: var(--on-teal); font-size: 1rem; }
+  .copy { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid rgba(250,244,234,.5); background: transparent; color: var(--cream); font: 600 .95rem var(--sans); cursor: pointer; transition: background-color .3s, color .3s; }
+  .copy:hover { background: var(--cream); color: var(--teal); }
+
+  .help { padding-block: clamp(40px, 5vw, 64px) clamp(96px, 12vw, 160px); }
+  .tabs { display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px; background: var(--sand); position: relative; }
+  .tabs button { position: relative; z-index: 1; min-height: 44px; padding: 0 22px; border: 0; background: transparent; border-radius: 999px; font: 600 1rem var(--sans); color: var(--teal); cursor: pointer; transition: color .35s; }
+  .tabs button[aria-selected="true"] { color: var(--cream); }
+  .tabs__pill { position: absolute; top: 5px; bottom: 5px; left: 5px; border-radius: 999px; background: var(--teal); transition: transform .5s var(--ease), width .5s var(--ease); }
+  .panel { margin-top: clamp(32px, 4vw, 48px); max-width: 860px; }
+  .panel[hidden] { display: none !important; }
+  .panel.is-shown { animation: up .7s var(--ease) both; }
+
+  details { border-top: 1px solid var(--sand); }
+  details:last-of-type { border-bottom: 1px solid var(--sand); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0; font-family: var(--serif); font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.25; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: ""; flex: none; width: 14px; height: 14px; border-right: 1.5px solid var(--teal); border-bottom: 1.5px solid var(--teal); transform: rotate(45deg) translate(-3px, -3px); transition: transform .45s var(--ease); }
+  details[open] summary::after { transform: rotate(225deg) translate(-3px, -3px); }
+  .answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--ease); }
+  details[open] .answer { grid-template-rows: 1fr; }
+  .answer > div { overflow: hidden; }
+  .answer p { padding-bottom: 26px; color: var(--slate); max-width: 62ch; }
+  .note { margin-top: 32px; color: var(--slate); font-size: 1rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__logo" href="index.html" aria-label="SARV Labs home"><img src="assets/img/logo-teal.svg" alt="SARV Labs" width="75" height="24"></a>
+    <button class="nav__toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    <ul class="nav__links">
+      <li><a href="steadfast/index.html">Steadfast</a></li>
+      <li><a href="encircled/index.html">Encircled</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="support.html" aria-current="page">Support</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <section class="wrap intro">
+    <div>
+      <p class="label">Support</p>
+      <h1>How can we help?</h1>
+      <p class="lead">A real person reads every message. Tell us which app you are using and what happened, and we will write back.</p>
+    </div>
+    <div class="mail">
+      <p class="label">Email us</p>
+      <p class="mail__addr" id="addr">support@sarvlabs.app</p>
+      <div class="mail__row">
+        <a class="btn btn--gold" href="mailto:support@sarvlabs.app">Write an email</a>
+        <button class="copy" type="button" id="copy">Copy address</button>
+      </div>
+      <p>We usually reply within two business days.</p>
+    </div>
+  </section>
+
+  <section class="wrap help" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="label" style="font-size: var(--fs-label)">Common questions</h2>
+    <div style="margin-top: 20px" class="tabs" role="tablist" aria-label="Choose an app">
+      <span class="tabs__pill" aria-hidden="true"></span>
+      <button type="button" role="tab" id="tab-steadfast" aria-controls="panel-steadfast" aria-selected="true">Steadfast</button>
+      <button type="button" role="tab" id="tab-encircled" aria-controls="panel-encircled" aria-selected="false">Encircled</button>
+    </div>
+
+    <div class="panel is-shown" id="panel-steadfast" role="tabpanel" aria-labelledby="tab-steadfast">
+      <details>
+        <summary>What happens if I miss a day?</summary>
+        <div class="answer"><div><p>It depends on the challenge. Strict challenges start again from Day 1. Others include forgiven skips, which Steadfast applies for you; the next morning’s review tells you what was forgiven. Some challenges simply note the miss and carry on.</p></div></div>
+      </details>
+      <details>
+        <summary>How do I delete my account?</summary>
+        <div class="answer"><div><p>In Steadfast, open Settings and choose Delete account. Your account and everything in it, including logs, notes and photos, is removed.</p></div></div>
+      </details>
+      <details>
+        <summary>Does Steadfast share my Apple Health data?</summary>
+        <div class="answer"><div><p>No. With your permission, Steadfast reads your workouts so it can fill in workout tasks for you. Health data is never sold, never used for advertising, and never shared with data brokers.</p></div></div>
+      </details>
+      <details>
+        <summary>Is there an Android version?</summary>
+        <div class="answer"><div><p>It is on the way. Steadfast launches on iPhone first, and your account will work on both.</p></div></div>
+      </details>
+      <details>
+        <summary>How do I cancel a subscription?</summary>
+        <div class="answer"><div><p>Subscriptions are handled by Apple. On your iPhone, open Settings, tap your name, then Subscriptions, and choose Steadfast.</p></div></div>
+      </details>
+    </div>
+
+    <div class="panel" id="panel-encircled" role="tabpanel" aria-labelledby="tab-encircled" hidden>
+      <details>
+        <summary>Where can I get Encircled?</summary>
+        <div class="answer"><div><p>Encircled is on the App Store for iPhone. <a class="more" href="https://apps.apple.com/app/id6764656882" target="_blank" rel="noopener">View on the App Store</a></p></div></div>
+      </details>
+      <details>
+        <summary>Something isn’t working. What should I send?</summary>
+        <div class="answer"><div><p>Email support@sarvlabs.app with your iPhone model, the app version (you’ll find it in the App Store listing), and a short description or screenshot of what happened.</p></div></div>
+      </details>
+    </div>
+    <p class="note">Looking for how we handle your data? Read our <a class="more" href="privacy.html">privacy policies</a></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/img/logo-cream.svg" alt="SARV Labs" width="112" height="36">
+        <p>Thoughtful software, made to last. An independent studio in Austin, Texas.</p>
+      </div>
+      <div>
+        <h4>Apps</h4>
+        <ul>
+          <li><a href="steadfast/index.html">Steadfast</a></li>
+          <li><a href="encircled/index.html">Encircled</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@sarvlabs.app">support@sarvlabs.app</a></li>
+          <li style="color: var(--on-teal); font-size: 1rem">Austin, Texas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> SARV Labs LLC. All rights reserved.</span>
+      <span>Made with care in Austin, Texas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script>
+  (function () {
+    var copy = document.getElementById('copy');
+    copy.addEventListener('click', function () {
+      var text = document.getElementById('addr').textContent.trim();
+      var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy address'; }, 1800); };
+      var select = function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('addr')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); copy.textContent = 'Selected, press copy'; };
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, select); } else { select(); }
+    });
+
+    var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+    var pill = document.querySelector('.tabs__pill');
+    function place(btn) { pill.style.width = btn.offsetWidth + 'px'; pill.style.transform = 'translateX(' + (btn.offsetLeft - 5) + 'px)'; }
+    function select(btn) {
+      tabs.forEach(function (t) {
+        var on = t === btn;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        panel.hidden = !on;
+        panel.classList.toggle('is-shown', on);
+      });
+      place(btn);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); select(n); }
+      });
+    });
+    var start = location.hash === '#encircled' ? tabs[1] : tabs[0];
+    requestAnimationFrame(function () { select(start); });
+    window.addEventListener('resize', function () { place(document.querySelector('[role="tab"][aria-selected="true"]')); });
+  })();
+</script>
+</body>
+</html>

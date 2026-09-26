@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF4EA">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<title>Encircled</title>
+<meta name="description" content="Encircled, by SARV Labs: share the physical books you own with friends and family. On the App Store for iPhone.">
+<meta name="theme-color" content="#FEE8D3">
+<style>
+  :root { --terra: #B66142; --terra-deep: #8E4529; --en-cream: #FEE8D3; --en-paper: #FFF7EF; --charcoal: #373434; --en-2: #5A4F4A; }
+  body.en { background: var(--en-paper); color: var(--charcoal); }
+  .en .label { color: var(--terra-deep); }
+
+  .pnav { position: fixed; inset: 0 0 auto 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); background: rgba(255, 247, 239, .78); backdrop-filter: saturate(1.4) blur(18px); -webkit-backdrop-filter: saturate(1.4) blur(18px); border-bottom: 1px solid rgba(55, 52, 52, .08); }
+  .pnav__inner { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .pnav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--charcoal); }
+  .pnav__brand img { width: 28px; height: 28px; border-radius: 7px; }
+  .pnav__brand b { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; }
+  .pnav__by { display: flex; padding-left: 14px; border-left: 1px solid rgba(55,52,52,.2); opacity: .7; }
+  .pnav__by img { height: 15px; width: auto; }
+  .pnav__links { display: flex; align-items: center; gap: 24px; list-style: none; margin: 0; padding: 0; }
+  .pnav__links a { color: var(--charcoal); text-decoration: none; font-size: .92rem; opacity: .8; }
+  .get { display: inline-flex; align-items: center; min-height: 34px; padding: 0 16px; border-radius: 999px; background: var(--terra-deep); color: #fff !important; opacity: 1 !important; font-weight: 700; font-size: .85rem; }
+  @media (max-width: 640px) { .pnav__links li.hide-sm, .pnav__by { display: none; } }
+
+  .hero { position: relative; overflow: hidden; padding-top: calc(56px + env(safe-area-inset-top, 0px) + clamp(56px, 8vw, 110px)); padding-bottom: clamp(90px, 11vw, 150px); background: var(--en-cream); }
+  .hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .hero__grid { grid-template-columns: 1fr; } }
+  .hero h1 { font-size: clamp(4rem, 11vw, 9.5rem); font-weight: 300; letter-spacing: -.035em; line-height: .95; animation: up 1.1s var(--ease) .05s both; }
+  .hero__tag { font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 2.8vw, 2.3rem); color: var(--terra-deep); margin-top: 14px; max-width: 18ch; line-height: 1.2; animation: up 1.1s var(--ease) .2s both; }
+  .hero p.lead { color: var(--en-2); margin-top: 26px; max-width: 40ch; animation: up 1.1s var(--ease) .32s both; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; margin-top: 34px; animation: up 1.1s var(--ease) .44s both; }
+  .appstore { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 0 24px 0 20px; border-radius: 14px; background: var(--charcoal); color: #fff; text-decoration: none; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .appstore:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(55,52,52,.6); }
+  .appstore small { display: block; font-size: .72rem; opacity: .8; letter-spacing: .02em; }
+  .appstore b { display: block; font-size: 1.2rem; font-weight: 600; line-height: 1.1; }
+  .en .more { color: var(--terra-deep); }
+  @keyframes up { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+  .orbit { position: relative; aspect-ratio: 1; width: min(100%, 460px); justify-self: center; display: grid; place-items: center; }
+  .orbit span { position: absolute; inset: 18%; border-radius: 50%; border: 1.5px solid rgba(182, 97, 66, .35); animation: ripple 7s var(--ease-soft) infinite; }
+  .orbit span:nth-child(2) { animation-delay: 2.33s; }
+  .orbit span:nth-child(3) { animation-delay: 4.66s; }
+  @keyframes ripple { from { transform: scale(.85); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+  .orbit img { position: relative; width: 62%; height: auto; aspect-ratio: 1; border-radius: 22%; box-shadow: 0 40px 80px -30px rgba(142, 69, 41, .6); animation: float 7s ease-in-out infinite, pop 1.2s var(--ease) .3s both; }
+  @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.85) rotate(-8deg); } to { opacity: 1; transform: none; } }
+
+  .how { padding-block: clamp(100px, 12vw, 170px); }
+  .how h2 { font-size: var(--fs-h2); margin-top: 14px; max-width: 16ch; }
+  .steps { margin-top: clamp(44px, 6vw, 72px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: step; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+  .step { border-radius: 28px; background: #fff; padding: clamp(28px, 3vw, 40px); display: grid; gap: 12px; align-content: start; box-shadow: 0 24px 50px -44px rgba(142, 69, 41, .6); counter-increment: step; }
+  .step::before { content: counter(step); font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--terra); }
+  .step h3 { font-size: clamp(1.5rem, 2.2vw, 1.9rem); }
+  .step p { color: var(--en-2); }
+
+  .quote { background: var(--terra); color: #FFF7EF; padding-block: clamp(110px, 13vw, 180px); }
+  .quote p { font-family: var(--serif); font-weight: 350; font-size: clamp(2rem, 4.6vw, 4rem); line-height: 1.12; letter-spacing: -.02em; max-width: 22ch; }
+
+  .avail { padding-block: clamp(100px, 12vw, 160px); text-align: center; }
+  .avail img { width: 110px; height: 110px; object-fit: cover; border-radius: 25px; margin: 0 auto; box-shadow: 0 30px 60px -28px rgba(142, 69, 41, .6); }
+  .avail h2 { font-size: var(--fs-h2); margin-top: 26px; }
+  .avail p { color: var(--en-2); margin: 16px auto 0; max-width: 40ch; }
+  .avail .hero__cta { justify-content: center; animation: none; }
+  .avail .links { margin-top: 26px; display: flex; justify-content: center; gap: 12px 28px; flex-wrap: wrap; }
+</style>
+</head>
+<body class="en">
+<a class="skip" href="#main">Skip to content</a>
+<header class="pnav">
+  <div class="wrap pnav__inner">
+    <div style="display:flex; align-items:center; gap:14px">
+      <a class="pnav__brand" href="index.html"><img src="../assets/img/encircled-icon.png" alt="" width="28" height="28"><b>Encircled</b></a>
+      <a class="pnav__by" href="../index.html" aria-label="By SARV Labs"><img src="../assets/img/logo-teal.svg" alt="SARV Labs" width="47" height="15"></a>
+    </div>
+    <ul class="pnav__links">
+      <li class="hide-sm"><a href="../support.html#encircled">Support</a></li>
+      <li><a class="get" href="https://apps.apple.com/app/id6764656882" target="_blank" rel="noopener">Get the app</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <h1>Encircled</h1>
+        <p class="hero__tag">Share your bookshelf with your circle.</p>
+        <p class="lead">Encircled lets you lend and borrow the physical books you own with the friends and family you trust.</p>
+        <div class="hero__cta">
+          <a class="appstore" href="https://apps.apple.com/app/id6764656882" target="_blank" rel="noopener" aria-label="Download Encircled on the App Store">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="#fff" aria-hidden="true"><path d="M18.2 13.8c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.4 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.3 1 3.9 1c1.6 0 2.7-1.5 3.7-2.9 1.2-1.7 1.6-3.3 1.7-3.4-.1 0-3.1-1.2-3.1-4.9zM15.2 4.9c.8-1 1.4-2.4 1.2-3.8-1.2 0-2.6.8-3.5 1.8-.8.9-1.4 2.3-1.2 3.7 1.3.1 2.7-.7 3.5-1.7z"/></svg>
+            <span><small>Download on the</small><b>App Store</b></span>
+          </a>
+          <a class="more" href="#how">How it works</a>
+        </div>
+      </div>
+      <div class="orbit" aria-hidden="true"><span></span><span></span><span></span><img src="../assets/img/encircled-icon.png" alt="" width="720" height="720"></div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <p class="label" data-reveal>How it works</p>
+      <h2 data-reveal style="--d:.06s">Good books are meant to travel.</h2>
+      <div class="steps">
+        <div class="step" data-reveal><h3>Add your shelf</h3><p>Put the books you own into Encircled, so your circle can see what you have.</p></div>
+        <div class="step" data-reveal style="--d:.1s"><h3>Build your circle</h3><p>Bring in the friends and family you would happily lend a book to.</p></div>
+        <div class="step" data-reveal style="--d:.2s"><h3>Lend and borrow</h3><p>Find a book someone in your circle owns, ask to borrow it, and pass it on when you are done.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote">
+    <div class="wrap"><p data-scrub>The best book recommendations come from the people who know you. Encircled puts their shelves within reach.</p></div>
+  </section>
+
+  <section class="avail">
+    <div class="wrap">
+      <img src="../assets/img/encircled-icon.png" alt="Encircled app icon" width="110" height="110" data-reveal="scale">
+      <h2 data-reveal style="--d:.08s">On the App Store now.</h2>
+      <p data-reveal style="--d:.14s">Encircled is available for iPhone.</p>
+      <div class="hero__cta" data-reveal style="--d:.2s">
+        <a class="appstore" href="https://apps.apple.com/app/id6764656882" target="_blank" rel="noopener" aria-label="Download Encircled on the App Store">
+          <svg width="22" height="26" viewBox="0 0 22 26" fill="#fff" aria-hidden="true"><path d="M18.2 13.8c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.4 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.3 1 3.9 1c1.6 0 2.7-1.5 3.7-2.9 1.2-1.7 1.6-3.3 1.7-3.4-.1 0-3.1-1.2-3.1-4.9zM15.2 4.9c.8-1 1.4-2.4 1.2-3.8-1.2 0-2.6.8-3.5 1.8-.8.9-1.4 2.3-1.2 3.7 1.3.1 2.7-.7 3.5-1.7z"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+      </div>
+      <div class="links" data-reveal style="--d:.26s">
+        <a class="more" href="../support.html#encircled">Get help</a>
+        <a class="more" href="#privacy" id="privacy">Privacy policy</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="../assets/img/logo-cream.svg" alt="SARV Labs" width="112" height="36">
+        <p>Thoughtful software, made to last. An independent studio in Austin, Texas.</p>
+      </div>
+      <div>
+        <h4>Apps</h4>
+        <ul>
+          <li><a href="../steadfast/index.html">Steadfast</a></li>
+          <li><a href="../encircled/index.html">Encircled</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../support.html">Support</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@sarvlabs.app">support@sarvlabs.app</a></li>
+          <li style="color: var(--on-teal); font-size: 1rem">Austin, Texas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> SARV Labs LLC. All rights reserved.</span>
+      <span>Made with care in Austin, Texas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
