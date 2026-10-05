@@ -33,6 +33,8 @@
   .doc p { margin-top: 14px; color: #3A4560; max-width: 64ch; }
   .doc strong { color: #1F2A44; }
   .doc article a { color: #01224D; text-underline-offset: 3px; }
+  .doc ul { margin-top: 14px; padding-left: 1.2em; display: grid; gap: 8px; }
+  .doc li { color: #3A4560; max-width: 62ch; }
   .todo { background: #FFF1CF; border-radius: 4px; padding: 0 4px; }
   .label { color: #8A5D14; }
 </style>
@@ -50,9 +52,11 @@
   <nav class="toc" aria-label="On this page">
     <p class="label" style="margin-bottom: 6px">On this page</p>
     <a href="#collect">What we collect</a>
+    <a href="#health">Apple Health and Health Connect</a>
+    <a href="#location">Location</a>
     <a href="#use">How we use it</a>
     <a href="#store">Where it is kept</a>
-    <a href="#share">Who we share it with</a>
+    <a href="#share">Who helps us run Steadfast</a>
     <a href="#choices">Your choices</a>
     <a href="#delete">Deleting your account</a>
     <a href="#children">Children</a>
@@ -61,21 +65,35 @@
   <article>
     <p class="label">Privacy</p>
     <h1 style="margin-top: 14px">Steadfast privacy policy</h1>
-    <p class="meta">Effective September 30, 2026 · SARV Labs LLC, Austin, Texas</p>
-    <p class="intro">Steadfast is made by SARV Labs LLC. This policy explains what the app collects, why, and what you can do about it. In short: we collect what the app needs to track your challenges, we never sell it, and you can delete it at any time.</p>
+    <p class="meta">Effective October 5, 2026 · SARV Labs LLC, Austin, Texas</p>
+    <p class="intro">Steadfast is made by SARV Labs LLC. This policy explains what the app collects, why, and what you can do about it. In short: we collect what the app needs to track your challenges, we never sell it, and you can export or delete it at any time.</p>
 
     <section id="collect">
       <h2>What we collect</h2>
-      <p><strong>Account.</strong> When you sign in with Apple or with an email code, we receive an account identifier and an email address, which may be Apple’s private relay address.</p>
-      <p><strong>Your challenges.</strong> The challenges you join, the tasks you log and when, skips, day notes, and your optional daily mood check.</p>
-      <p><strong>Photos.</strong> Progress and meal photos you choose to take in the app.</p>
-      <p><strong>Health data.</strong> Steadfast can read sleep, workouts and walking or running distance from Apple Health (Health Connect on Android), only if you turn it on. It never writes to Health. When a workout or night’s sleep completes one of your tasks, Steadfast saves only what that task needs: the activity type, its duration or distance, when it happened, and an identifier so the same workout isn’t counted twice. Everything else stays in Apple Health on your phone. Health data is never used for advertising, never sold, and never shown to your partners; they see only whether a task was done.</p>
-      <p><strong>Location.</strong> Location is optional. While the app is open, Steadfast uses your approximate location to show local weather and sunrise and sunset times. On iPhone your location goes to Apple’s WeatherKit; on Android it is rounded to about 1&nbsp;km on your phone before it goes to our weather service, which uses it only to fetch the weather, keeps it in memory for no more than 10 minutes and never stores it. Steadfast never saves your location to your account.</p>
+      <p><strong>Signing in.</strong> You can sign in with Apple, with Google (on iPhone and Android), or with your email and a password. We receive your email address and, from Apple or Google, your name. With Apple, you may use Apple’s private relay address instead of your own. If you forget your password, we email you a 6-digit code to reset it.</p>
+      <p><strong>Your challenges.</strong> To run the app for you, Steadfast keeps the challenges you join, your plan and reminder times, the tasks you log and when, skips, slips and which part of a rule slipped, your evening look-back answers (including the optional “How was today?” mood and note), your weekly check-in answers, your “three good things” lines, the books and pages you read, the water you log, and your time zone.</p>
+      <p><strong>Photos.</strong> Progress photos, meal photos and your profile photo that you take in the app. Progress photos are private: only you see them. Share cards you choose to make never include a progress (body) photo.</p>
+      <p><strong>Finding a challenge.</strong> If you answer the “Help me choose” questions, your answers are saved without your name or account, only so we can see which challenges fit people. They can’t be traced back to you.</p>
+      <p><strong>Feedback.</strong> When you send feedback in the app, we keep your message, an optional screenshot, your app version and your phone model, so we can answer you and fix things. A notice of each message is emailed to us through our email provider, Resend. Your feedback and its screenshot are deleted when you delete your account.</p>
+    </section>
+
+    <section id="health">
+      <h2>Apple Health and Health Connect</h2>
+      <p>Only if you turn it on, Steadfast reads sleep, workouts, steps, walking or running distance, and mindful minutes from Apple Health (iPhone) or Health Connect (Android), to check off the tasks they cover. Steadfast only reads; it never writes to Health.</p>
+      <p>When Health data completes one of your tasks, Steadfast saves only what that task needs: the activity type, how long or how much (for example minutes, kilometres or steps), when it happened, and an identifier so the same activity isn’t counted twice. Everything else stays in Apple Health or Health Connect on your phone.</p>
+      <p>Health data is never used for advertising or marketing, never sold, and never shared except to run the app for you. Your partners never see it; they see only whether a task was done.</p>
+    </section>
+
+    <section id="location">
+      <h2>Location</h2>
+      <p>Location is optional. Steadfast uses it only while the app is open, to show your local sky and weather, and never stores it.</p>
+      <p>On iPhone, Apple’s WeatherKit gets your location as part of the weather request. On Android, your location is rounded to about 1&nbsp;km on your phone before it is sent to our weather service, which asks Apple’s WeatherKit for the weather and keeps the location in memory for no more than 10 minutes. Also on Android, to show your town’s name, the phone’s built-in place lookup (provided by Google) may receive your approximate location.</p>
     </section>
 
     <section id="use">
       <h2>How we use it</h2>
-      <p>Only to run Steadfast for you: keeping your days, showing your progress, sending the reminders you turn on, and answering you when you contact support. We do not use your data for advertising, and Health data is never used for marketing or shared with data brokers.</p>
+      <p>Only to run Steadfast for you: keeping your days, showing your progress, reminding you when you ask us to, and answering you when you contact support. We do not use your data for advertising, and Health data is never used for marketing or shared with data brokers.</p>
+      <p>Reminders are scheduled on your phone. We don’t send push notifications from a server.</p>
     </section>
 
     <section id="store">
@@ -84,18 +102,28 @@
     </section>
 
     <section id="share">
-      <h2>Who we share it with</h2>
-      <p>We do not sell your personal information. We share it only with the service providers that run the app (Supabase for storage; Apple for sign-in, weather and payments on iPhone; Google Play for payments on Android; and our weather service, which receives only a rounded location on Android) or when the law requires it.</p>
+      <h2>Who helps us run Steadfast</h2>
+      <p>We never sell your data. These service providers help us run the app, and each gets only what it needs for its part:</p>
+      <ul>
+        <li><strong>Supabase:</strong> database and photo storage, on Amazon Web Services in Northern California.</li>
+        <li><strong>Apple:</strong> Sign in with Apple, WeatherKit and App Store payments.</li>
+        <li><strong>Google:</strong> Google sign-in, Google Books and Google Play payments.</li>
+        <li><strong>Open Library:</strong> book search.</li>
+        <li><strong>Resend:</strong> the email notice we receive when you send feedback.</li>
+      </ul>
+      <p><strong>Books.</strong> When you search for a book, your search words (or the barcode number) are sent to Google Books and Open Library to find it. Nothing else about you is sent.</p>
+      <p>Steadfast has no advertising networks, no analytics or tracking tools, and no data brokers. Apart from these providers, we share your information only when the law requires it.</p>
     </section>
 
     <section id="choices">
       <h2>Your choices</h2>
-      <p>You can turn off Health, location and notification access in your phone’s settings at any time. You can also email us to ask for a copy of your data.</p>
+      <p><strong>Export your data.</strong> In Settings → Privacy → Export my data, Steadfast makes one .zip file on your phone with spreadsheets of everything you’ve logged, a full copy of your data, and your photos.</p>
+      <p><strong>Turn things off.</strong> You can turn off Health, location and each kind of reminder at any time, in the app or in your phone’s settings.</p>
     </section>
 
     <section id="delete">
       <h2>Deleting your account</h2>
-      <p>You can delete your account at any time in Settings → Manage account. Your photos are deleted first, then your account, challenges, logs and notes are removed from our live database immediately, and from backups within 30 days. If any part of the deletion fails, nothing is removed and the app tells you to try again.</p>
+      <p>You can delete your account at any time in Settings → Account → Delete account. Your account, challenges, photos, notes and feedback are removed from our live database right away, and from our backups within 30 days. If any part of the deletion fails, nothing is removed and the app tells you to try again.</p>
       <p>Can’t sign in? See <a href="delete-account/">Delete your Steadfast account</a> to ask us to delete it by email.</p>
     </section>
 
@@ -106,7 +134,7 @@
 
     <section id="contact">
       <h2>Changes and contact</h2>
-      <p>If this policy changes, we will update the date above and, for significant changes, tell you in the app. Questions: support@sarvlabs.app.</p>
+      <p>If this policy changes, we will update the date above and, for significant changes, tell you in the app. Questions: <a href="mailto:support@sarvlabs.app">support@sarvlabs.app</a>.</p>
     </section>
   </article>
 </main>
