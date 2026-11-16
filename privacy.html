@@ -16,8 +16,11 @@
   .intro { padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + clamp(56px, 8vw, 112px)); padding-bottom: clamp(40px, 5vw, 64px); }
   .intro h1 { font-size: var(--fs-h1); margin-top: 16px; max-width: 14ch; }
   .intro .lead { margin-top: 20px; max-width: 48ch; }
-  .policies { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: clamp(56px, 7vw, 96px); }
+  .policies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: clamp(56px, 7vw, 96px); }
+  @media (max-width: 1000px) { .policies { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 760px) { .policies { grid-template-columns: 1fr; } }
+  .policy--cf { background: #171717; color: #FBF8F3; }
+  .policy--cf p { color: #D9D1C5; }
   .policy { border-radius: 24px; padding: clamp(28px, 3.4vw, 40px); display: grid; gap: 12px; text-decoration: none; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
   .policy:hover { transform: translateY(-4px); box-shadow: 0 28px 50px -30px rgba(4,61,64,.5); }
   .policy h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
@@ -42,6 +45,7 @@
     <a class="nav__logo" href="index.html" aria-label="SARV Labs home"><img src="assets/img/logo-teal.svg" alt="SARV Labs" width="75" height="24"></a>
     <button class="nav__toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     <ul class="nav__links">
+      <li><a href="closetfolio/index.html">Closetfolio</a></li>
       <li><a href="steadfast/index.html">Steadfast</a></li>
       <li><a href="encircled/index.html">Encircled</a></li>
       <li><a href="about.html">About</a></li>
@@ -58,16 +62,22 @@
   </section>
 
   <section class="wrap policies" aria-label="App privacy policies">
-    <a class="policy policy--sf" href="steadfast/privacy.html" data-reveal>
+    <a class="policy policy--cf" href="https://closetfolio.app/privacy" target="_blank" rel="noopener" data-reveal>
+      <p class="label" style="color: #D9D1C5">Closetfolio</p>
+      <h2>Closetfolio privacy policy</h2>
+      <p>How Closetfolio handles your account, your clothing photos and Closet AI. Kept on closetfolio.app.</p>
+      <span class="more">Read the policy</span>
+    </a>
+    <a class="policy policy--sf" href="steadfast/privacy.html" data-reveal style="--d:.08s">
       <p class="label" style="color: #E3A73F">Steadfast</p>
       <h2>Steadfast privacy policy</h2>
       <p>What Steadfast stores to track your challenges, and how Apple Health, photos and location are used.</p>
       <span class="more">Read the policy</span>
     </a>
-    <a class="policy policy--en" href="encircled/index.html#privacy" data-reveal style="--d:.1s">
+    <a class="policy policy--en" href="https://encircled.app/privacy.html" target="_blank" rel="noopener" data-reveal style="--d:.16s">
       <p class="label" style="color: #8E4529">Encircled</p>
       <h2>Encircled privacy policy</h2>
-      <p>How Encircled handles your account, your books and your circle.</p>
+      <p>How Encircled handles your account, your books and your circle. Kept on encircled.app.</p>
       <span class="more">Read the policy</span>
     </a>
   </section>
@@ -97,6 +107,7 @@
       <div>
         <h4>Apps</h4>
         <ul>
+          <li><a href="closetfolio/index.html">Closetfolio</a></li>
           <li><a href="steadfast/index.html">Steadfast</a></li>
           <li><a href="encircled/index.html">Encircled</a></li>
         </ul>

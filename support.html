@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <title>SARV Labs Support</title>
-<meta name="description" content="Help with Steadfast and Encircled, the apps made by SARV Labs.">
+<meta name="description" content="Help with Closetfolio, Steadfast and Encircled, the apps made by SARV Labs.">
 <style>
   .intro { padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + clamp(56px, 8vw, 112px)); padding-bottom: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px 64px; align-items: end; }
   .intro h1 { font-size: var(--fs-hero); margin-top: 16px; animation: up 1.1s var(--ease) .05s both; }
@@ -31,6 +31,7 @@
   .tabs { display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px; background: var(--sand); position: relative; }
   .tabs button { position: relative; z-index: 1; min-height: 44px; padding: 0 22px; border: 0; background: transparent; border-radius: 999px; font: 600 1rem var(--sans); color: var(--teal); cursor: pointer; transition: color .35s; }
   .tabs button[aria-selected="true"] { color: var(--cream); }
+  @media (max-width: 480px) { .tabs button { padding: 0 14px; font-size: .95rem; } }
   .tabs__pill { position: absolute; top: 5px; bottom: 5px; left: 5px; border-radius: 999px; background: var(--teal); transition: transform .5s var(--ease), width .5s var(--ease); }
   .panel { margin-top: clamp(32px, 4vw, 48px); max-width: 860px; }
   .panel[hidden] { display: none !important; }
@@ -56,6 +57,7 @@
     <a class="nav__logo" href="index.html" aria-label="SARV Labs home"><img src="assets/img/logo-teal.svg" alt="SARV Labs" width="75" height="24"></a>
     <button class="nav__toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     <ul class="nav__links">
+      <li><a href="closetfolio/index.html">Closetfolio</a></li>
       <li><a href="steadfast/index.html">Steadfast</a></li>
       <li><a href="encircled/index.html">Encircled</a></li>
       <li><a href="about.html">About</a></li>
@@ -86,11 +88,31 @@
     <h2 id="faq-title" class="label" style="font-size: var(--fs-label)">Common questions</h2>
     <div style="margin-top: 20px" class="tabs" role="tablist" aria-label="Choose an app">
       <span class="tabs__pill" aria-hidden="true"></span>
-      <button type="button" role="tab" id="tab-steadfast" aria-controls="panel-steadfast" aria-selected="true">Steadfast</button>
+      <button type="button" role="tab" id="tab-closetfolio" aria-controls="panel-closetfolio" aria-selected="true">Closetfolio</button>
+      <button type="button" role="tab" id="tab-steadfast" aria-controls="panel-steadfast" aria-selected="false">Steadfast</button>
       <button type="button" role="tab" id="tab-encircled" aria-controls="panel-encircled" aria-selected="false">Encircled</button>
     </div>
 
-    <div class="panel is-shown" id="panel-steadfast" role="tabpanel" aria-labelledby="tab-steadfast">
+    <div class="panel is-shown" id="panel-closetfolio" role="tabpanel" aria-labelledby="tab-closetfolio">
+      <details>
+        <summary>Where can I get Closetfolio?</summary>
+        <div class="answer"><div><p>Closetfolio is free to download on the App Store for iPhone and on Google Play for Android. It’s opening to new members in stages, so request an invite in the app or at closetfolio.app. <a class="more" href="https://apps.apple.com/app/closetfolio-digital-closet/id6825198911" target="_blank" rel="noopener">View on the App Store</a> <a class="more" href="https://play.google.com/store/apps/details?id=app.sarvlabs.closetfolio" target="_blank" rel="noopener">Get it on Google Play</a></p></div></div>
+      </details>
+      <details>
+        <summary>How do I get help with Closetfolio?</summary>
+        <div class="answer"><div><p>Closetfolio has its own help page and inbox. Write to hello@closetfolio.app and a person replies, usually within 2 working days. <a class="more" href="https://closetfolio.app/support" target="_blank" rel="noopener">Closetfolio support</a></p></div></div>
+      </details>
+      <details>
+        <summary>How do I delete my Closetfolio account?</summary>
+        <div class="answer"><div><p>The steps are on Closetfolio’s own website. <a class="more" href="https://closetfolio.app/delete-account" target="_blank" rel="noopener">Delete your Closetfolio account</a></p></div></div>
+      </details>
+      <details>
+        <summary>How is my Closetfolio data handled?</summary>
+        <div class="answer"><div><p>Closetfolio has its own privacy policy and terms. <a class="more" href="https://closetfolio.app/privacy" target="_blank" rel="noopener">Privacy policy</a> <a class="more" href="https://closetfolio.app/terms" target="_blank" rel="noopener">Terms of use</a></p></div></div>
+      </details>
+    </div>
+
+    <div class="panel" id="panel-steadfast" role="tabpanel" aria-labelledby="tab-steadfast" hidden>
       <details>
         <summary>What happens if I miss a day?</summary>
         <div class="answer"><div><p>It depends on the challenge. Strict challenges start again from Day 1. Others include forgiven skips, which Steadfast applies for you; the next morning’s review tells you what was forgiven. Some challenges simply note the miss and carry on.</p></div></div>
@@ -133,6 +155,7 @@
       <div>
         <h4>Apps</h4>
         <ul>
+          <li><a href="closetfolio/index.html">Closetfolio</a></li>
           <li><a href="steadfast/index.html">Steadfast</a></li>
           <li><a href="encircled/index.html">Encircled</a></li>
         </ul>
@@ -191,7 +214,7 @@
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); select(n); }
       });
     });
-    var start = location.hash === '#encircled' ? tabs[1] : tabs[0];
+    var start = tabs.filter(function (t) { return '#' + t.id.replace('tab-', '') === location.hash; })[0] || tabs[0];
     requestAnimationFrame(function () { select(start); });
     window.addEventListener('resize', function () { place(document.querySelector('[role="tab"][aria-selected="true"]')); });
   })();
